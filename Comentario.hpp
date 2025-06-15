@@ -1,7 +1,8 @@
-#include <iostream>
+#ifndef COMENTARIO_HPP
+#define COMENTARIO_HPP
+
 #include <string>
-#include <vector>
-#include <algorithm>
+#include <iostream>
 using namespace std;
 
 class Comentario {
@@ -20,3 +21,5 @@ public:
         cout << usuario << " comentó: " << texto << endl;
     }
 };
+
+#endif

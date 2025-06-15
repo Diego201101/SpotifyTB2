@@ -1,7 +1,8 @@
-#include <iostream>
+#ifndef USUARIO_HPP
+#define USUARIO_HPP
+
 #include <string>
-#include <vector>
-#include <algorithm>
+#include <iostream>
 using namespace std;
 
 class Usuario {
@@ -25,3 +26,5 @@ public:
         cout << "Usuario: " << nombre << " | Correo: " << correo << endl;
     }
 };
+
+#endif

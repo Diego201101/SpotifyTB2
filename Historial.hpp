@@ -1,7 +1,8 @@
-#include <iostream>
-#include <string>
+#ifndef HISTORIAL_HPP
+#define HISTORIAL_HPP
+
 #include <vector>
-#include <algorithm>
+#include <iostream>
 using namespace std;
 
 template <typename T>
@@ -19,4 +20,3 @@ public:
             c.mostrar();
         }
     }
-};

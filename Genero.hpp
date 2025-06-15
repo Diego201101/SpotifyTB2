@@ -1,7 +1,8 @@
-#include <iostream>
+#ifndef GENERO_HPP
+#define GENERO_HPP
+
 #include <string>
-#include <vector>
-#include <algorithm>
+#include <iostream>
 using namespace std;
 
 class Genero {
@@ -18,3 +19,5 @@ public:
 
     string getNombre() { return nombre; }
 };
+
+#endif

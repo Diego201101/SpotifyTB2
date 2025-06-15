@@ -1,7 +1,8 @@
-#include <iostream>
+#ifndef CANCION_HPP
+#define CANCION_HPP
+
 #include <string>
-#include <vector>
-#include <algorithm>
+#include <iostream>
 using namespace std;
 
 class Cancion {
@@ -19,3 +20,5 @@ public:
         cout << titulo << " - " << artista << " (" << duracion << " min)" << endl;
     }
 };
+
+#endif

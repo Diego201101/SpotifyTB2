@@ -1,7 +1,10 @@
-#include <iostream>
-#include <string>
+#ifndef PLAYLIST_HPP
+#define PLAYLIST_HPP
+
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include "Cancion.hpp"
 using namespace std;
 
 class Playlist {
@@ -28,3 +31,5 @@ public:
         }
     }
 };
+
+#endif
