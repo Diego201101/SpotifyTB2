@@ -1,28 +1,31 @@
 #pragma once
-#pragma once
 #ifndef LISTADOBLECIRCULAR_H
 #define LISTADOBLECIRCULAR_H
 
 #include "Cancion.h"
+#include <memory>
 #include <functional>
+#include <algorithm>
+
 using namespace std;
 
-class ListaReproduccionCircular {
+class ListaDobleCircular {
 private:
-    struct Nodo {
-        Cancion cancion;
-        Nodo* anterior;
-        Nodo* siguiente;
-        Nodo(Cancion c) : cancion(c), anterior(nullptr), siguiente(nullptr) {}
+    class Nodo {
+    public:
+        Cancion dato;
+        shared_ptr<Nodo> anterior;
+        shared_ptr<Nodo> siguiente;
+        Nodo(const Cancion& val) : dato(val), anterior(nullptr), siguiente(nullptr) {}
     };
 
-    Nodo* actual;
+    shared_ptr<Nodo> actual;
 
 public:
-    ListaReproduccionCircular() : actual(nullptr) {}
+    ListaDobleCircular() : actual(nullptr) {}
 
-    void agregarCancion(Cancion cancion) {
-        Nodo* nuevo = new Nodo(cancion);
+    void agregarCancion(const Cancion& cancion) {
+        auto nuevo = make_shared<Nodo>(cancion);
         if (!actual) {
             actual = nuevo;
             actual->anterior = actual;
@@ -36,25 +39,45 @@ public:
         }
     }
 
-    Cancion reproducirSiguiente() {
-        if (!actual) throw runtime_error("Lista vacia");
-        Cancion cancion = actual->cancion;
-        actual = actual->siguiente;
-        return cancion;
+    void reproducirSiguiente() {
+        if (actual) {
+            actual->dato.mostrar();
+            actual = actual->siguiente;
+        }
     }
 
     void mostrarLista() {
         if (!actual) {
-            cout << "Lista vacia\n";
+            cout << "Lista vacía\n";
             return;
         }
 
-        cout << "\nLista de reproduccion circular:\n";
-        Nodo* inicio = actual;
+        auto inicio = actual;
         do {
-            actual->cancion.mostrar();
+            actual->dato.mostrar();
             actual = actual->siguiente;
         } while (actual != inicio);
+    }
+
+    void ordenarPorDuracion() {
+        if (!actual) return;
+
+        vector<Cancion> canciones;
+        auto inicio = actual;
+        do {
+            canciones.push_back(actual->dato);
+            actual = actual->siguiente;
+        } while (actual != inicio);
+
+        sort(canciones.begin(), canciones.end(),
+            [](Cancion& a, Cancion& b) {
+                return a.getDuracion() < b.getDuracion();
+            });
+
+        actual = nullptr;
+        for (const auto& cancion : canciones) {
+            agregarCancion(cancion);
+        }
     }
 };
 
