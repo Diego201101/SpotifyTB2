@@ -4,71 +4,69 @@
 
 #include "Cancion.h"
 #include <functional>
+#include <memory>
+
 using namespace std;
 
-template <typename T>
 class ListaEnlazada {
 private:
-    struct Nodo {
-        T dato;
-        Nodo* siguiente;
-        Nodo(T val) : dato(val), siguiente(nullptr) {}
+    class Nodo {
+    public:
+        Cancion dato;
+        shared_ptr<Nodo> siguiente;
+        Nodo(const Cancion& val) : dato(val), siguiente(nullptr) {}
     };
 
-    Nodo* cabeza;
+    shared_ptr<Nodo> cabeza;
 
 public:
     ListaEnlazada() : cabeza(nullptr) {}
 
-    void agregarCancion(T cancion) {
-        Nodo* nuevo = new Nodo(cancion);
+    void agregarCancion(const Cancion& cancion) {
+        auto nuevo = make_shared<Nodo>(cancion);
         if (!cabeza) {
             cabeza = nuevo;
         }
         else {
-            auto encontrarUltimo = [](Nodo* nodo) {
+            auto encontrarUltimo = [](shared_ptr<Nodo> nodo) {
                 while (nodo->siguiente) nodo = nodo->siguiente;
                 return nodo;
                 };
-            Nodo* ultimo = encontrarUltimo(cabeza);
+            auto ultimo = encontrarUltimo(cabeza);
             ultimo->siguiente = nuevo;
         }
     }
 
-    void mostrarCanciones() {
-        Nodo* actual = cabeza;
-        while (actual) {
-            actual->dato.mostrar();
-            actual = actual->siguiente;
-        }
-    }
+    void filtrarPorGenero(const string& genero) {
+        function<void(shared_ptr<Nodo>, shared_ptr<Nodo>)> filtrar =
+            [&](shared_ptr<Nodo> actual, shared_ptr<Nodo> anterior) {
+            if (!actual) return;
 
-    void filtrarPorGenero(string genero) {
-        auto criterio = [genero](T cancion) {
-            return cancion.getGenero() == genero;
-            };
-
-        Nodo* actual = cabeza;
-        Nodo* anterior = nullptr;
-        while (actual) {
-            if (!criterio(actual->dato)) {
+            if (actual->dato.getGenero() != genero) {
                 if (anterior) {
                     anterior->siguiente = actual->siguiente;
                 }
                 else {
                     cabeza = actual->siguiente;
                 }
-                Nodo* temp = actual;
-                actual = actual->siguiente;
-                delete temp;
+                auto temp = actual;
+                filtrar(actual->siguiente, anterior);
             }
             else {
-                anterior = actual;
-                actual = actual->siguiente;
+                filtrar(actual->siguiente, actual);
             }
+            };
+
+        filtrar(cabeza, nullptr);
+    }
+
+    void mostrarCanciones() const {
+        auto actual = cabeza;
+        while (actual) {
+            actual->dato.mostrar();
+            actual = actual->siguiente;
         }
     }
 };
-
 #endif
 //D
