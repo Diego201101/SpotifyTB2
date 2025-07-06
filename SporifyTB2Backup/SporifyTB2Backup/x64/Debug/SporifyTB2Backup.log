@@ -1,0 +1,52 @@
+﻿  SpotifyClone.cpp
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\ColaReproduccion.h(39,45): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "SpotifyClone.cpp")
+  
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\GeneradorAleatorio.h(19,36): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  (compilando archivo de origen "SpotifyClone.cpp")
+  
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\GeneradorAleatorio.h(27,65): warning C4267: 'argumento': conversión de 'size_t' a '_Ty'; posible pérdida de datos
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\GeneradorAleatorio.h(27,65): warning C4267:         with
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\GeneradorAleatorio.h(27,65): warning C4267:         [
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\GeneradorAleatorio.h(27,65): warning C4267:             _Ty=int
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\GeneradorAleatorio.h(27,65): warning C4267:         ]
+  (compilando archivo de origen "SpotifyClone.cpp")
+  
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\Suscripcion.h(35,31): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "SpotifyClone.cpp")
+  
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(85,50): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(86,53): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(87,43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(88,47): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(89,42): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(92,47): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(93,57): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(99,40): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(100,46): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(101,47): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(102,47): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(106,44): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(107,43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(108,36): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(109,40): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(113,45): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(115,45): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(116,41): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(123,51): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(127,56): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(128,50): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(129,44): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(130,53): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(131,43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(132,55): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(133,37): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(134,53): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(135,43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(136,46): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(137,54): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(138,44): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(140,37): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Programacion Projects\SporifyTB2Backup\SporifyTB2Backup\SpotifyClone.cpp(311,56): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+  SpotifyClone.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+  SporifyTB2Backup.vcxproj -> D:\Programacion Projects\SporifyTB2Backup\x64\Debug\SporifyTB2Backup.exe
