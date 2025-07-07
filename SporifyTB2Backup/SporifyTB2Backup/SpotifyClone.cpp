@@ -33,11 +33,30 @@ private:
         inOrden(nodo->derecha);
     }
 
-    Cancion* buscar(NodoArbol* nodo, int id) {
-        if (!nodo) return nullptr;
-        if (id == nodo->id) return &nodo->cancion;
-        if (id < nodo->id) return buscar(nodo->izquierda, id);
-        else return buscar(nodo->derecha, id);
+    void preOrden(NodoArbol* nodo) {
+        if (!nodo) return;
+        cout << "ID " << nodo->id << ": ";
+        nodo->cancion.mostrar();
+        preOrden(nodo->izquierda);
+        preOrden(nodo->derecha);
+    }
+
+    void postOrden(NodoArbol* nodo) {
+        if (!nodo) return;
+        postOrden(nodo->izquierda);
+        postOrden(nodo->derecha);
+        cout << "ID " << nodo->id << ": ";
+        nodo->cancion.mostrar();
+    }
+
+    void simularExportacion(NodoArbol* nodo, string recorrido, vector<string>& exportado) {
+        if (!nodo) return;
+
+        if (recorrido == "pre") exportado.push_back(nodo->cancion.getTitulo());
+        simularExportacion(nodo->izquierda, recorrido, exportado);
+        if (recorrido == "in") exportado.push_back(nodo->cancion.getTitulo());
+        simularExportacion(nodo->derecha, recorrido, exportado);
+        if (recorrido == "post") exportado.push_back(nodo->cancion.getTitulo());
     }
 
 public:
@@ -48,47 +67,73 @@ public:
     }
 
     void mostrarEnOrden() {
+        cout << "\n🎵 Mostrando canciones ordenadas por ID (Inorden - ideal para listar en el catálogo):\n";
         inOrden(raiz);
     }
 
-    Cancion* buscarPorID(int id) {
-        return buscar(raiz, id);
+    void mostrarPreOrden() {
+        cout << "\n🎶 Mostrando canciones en orden de prioridad (Preorden - útil para cargar favoritos):\n";
+        preOrden(raiz);
+    }
+
+    void mostrarPostOrden() {
+        cout << "\n🧹 Mostrando canciones en postorden (ideal para eliminar de manera segura):\n";
+        postOrden(raiz);
+    }
+
+    void exportarSimulado(string tipo) {
+        vector<string> exportado;
+        simularExportacion(raiz, tipo, exportado);
+        cout << "\n📄 Exportación simulada (" << tipo << "orden): ";
+        for (const auto& titulo : exportado) {
+            cout << "\"" << titulo << "\" ";
+        }
+        cout << "\n";
     }
 };
 
-// Mostrar canciones ordenadas por ID
-void SpotifyClone::ordenarPorIDConArbol() {
+void SpotifyClone::mostrarCancionesPorRecorrido() {
     ArbolCanciones arbol;
     for (int i = 0; i < biblioteca.size(); ++i) {
         arbol.insertarCancion(i, biblioteca[i]);
     }
 
-    cout << "\nCanciones ordenadas por ID (usando árbol binario):\n";
-    arbol.mostrarEnOrden();
-    pausar();
-}
+    int opcion;
+    do {
+        limpiarPantalla();
+        cout << "🔁 Recorridos del Árbol de Canciones (simulan distintos usos):\n";
+        cout << "1. Inorden (orden por ID / catálogo)\n";
+        cout << "2. Preorden (favoritos / carga rápida)\n";
+        cout << "3. Postorden (eliminación segura)\n";
+        cout << "4. Exportar (simulado)\n";
+        cout << "0. Volver\n";
+        cout << "Opción: ";
+        cin >> opcion;
 
-// Buscar canción por ID
-void SpotifyClone::buscarCancionPorID() {
-    ArbolCanciones arbol;
-    for (int i = 0; i < biblioteca.size(); ++i) {
-        arbol.insertarCancion(i, biblioteca[i]);
-    }
+        switch (opcion) {
+        case 1:
+            arbol.mostrarEnOrden();
+            break;
+        case 2:
+            arbol.mostrarPreOrden();
+            break;
+        case 3:
+            arbol.mostrarPostOrden();
+            break;
+        case 4: {
+            int tipo;
+            cout << "\nExportar recorrido:\n1. Inorden\n2. Preorden\n3. Postorden\nOpción: ";
+            cin >> tipo;
+            if (tipo == 1) arbol.exportarSimulado("in");
+            else if (tipo == 2) arbol.exportarSimulado("pre");
+            else if (tipo == 3) arbol.exportarSimulado("post");
+            else cout << "Opción inválida.\n";
+            break;
+        }
+        }
 
-    cout << "\nIngrese el ID de la canción a buscar (0 - " << biblioteca.size() - 1 << "): ";
-    int id;
-    cin >> id;
-
-    Cancion* encontrada = arbol.buscarPorID(id);
-    if (encontrada) {
-        cout << "\nCanción encontrada:\n";
-        encontrada->mostrar();
-    }
-    else {
-        cout << "No se encontró ninguna canción con ese ID.\n";
-    }
-
-    pausar();
+        if (opcion != 0) pausar();
+    } while (opcion != 0);
 }
 
 
@@ -267,7 +312,7 @@ void SpotifyClone::mostrarMenuPrincipal() {
     cout << "| 11. Ver artistas                                             |\n";
     cout << "| 12. Ver albumes                                              |\n";
     cout << "| 13. Ver suscripcion                                          |\n";
-    cout << "| 14. Ordenamiento arbol binario                               |\n";
+    cout << "| 14. Vista estructurada de canciones                          |\n";
     cout << "|  0. Salir                                                    |\n";
     cout << "|____________________________________________________________|\n";
     cout << "Seleccione una opcion: ";
@@ -1075,28 +1120,10 @@ void SpotifyClone::ejecutar() {
         case 13:
             verSuscripcion();
             break;
-        case 14: {
-            int subop;
-            do {
-                limpiarPantalla();
-                cout << "\nÁRBOL BINARIO - OPERACIONES POR ID\n";
-                cout << "1. Mostrar canciones ordenadas por ID\n";
-                cout << "2. Buscar canción por ID\n";
-                cout << "0. Volver\n";
-                cout << "Opción: ";
-                cin >> subop;
-
-                switch (subop) {
-                case 1:
-                    ordenarPorIDConArbol();
-                    break;
-                case 2:
-                    buscarCancionPorID();
-                    break;
-                }
-            } while (subop != 0);
+        case 14:
+            mostrarCancionesPorRecorrido();
             break;
-        }
+
     
 
         case 0:
