@@ -79,6 +79,7 @@ private:
     void verSuscripcion();
     void limpiarPantalla();
     void pausar();
+    void mostrarCancionesPorRecorrido();
 
 public:
     SpotifyClone();
