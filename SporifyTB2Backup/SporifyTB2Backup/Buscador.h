@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include "Cancion.h"
+#include "Hash.h"
 
 using namespace std;
 
@@ -13,26 +14,23 @@ class Buscador {
 public:
     vector<Cancion> buscar(vector<Cancion>& canciones, string& criterio) {
         vector<Cancion> resultados;
-
-        // Lambda M
-        auto contiene = [](string& texto, string& criterio) {
-            auto it = search(texto.begin(), texto.end(),
-                criterio.begin(), criterio.end(),
-                //LAMBDA M
-                [](char ch1, char ch2) {
-                    return tolower(ch1) == tolower(ch2);
-                });
-            return it != texto.end();
-        };
-
+        transform(criterio.begin(), criterio.end(), criterio.begin(), ::tolower);
+    
         for (auto& cancion : canciones) {
-            if (contiene(cancion.getTitulo(), criterio) ||
-                contiene(cancion.getArtista(), criterio) ||
-                contiene(cancion.getGenero(), criterio)) {
+            string titulo = cancion.getTitulo();
+            string artista = cancion.getArtista();
+            string genero = cancion.getGenero();
+    
+            transform(titulo.begin(), titulo.end(), titulo.begin(), ::tolower);
+            transform(artista.begin(), artista.end(), artista.begin(), ::tolower);
+            transform(genero.begin(), genero.end(), genero.begin(), ::tolower);
+    
+            if (titulo.find(criterio) != string::npos ||
+                artista.find(criterio) != string::npos ||
+                genero.find(criterio) != string::npos) {
                 resultados.push_back(cancion);
             }
         }
-
         return resultados;
     }
 
