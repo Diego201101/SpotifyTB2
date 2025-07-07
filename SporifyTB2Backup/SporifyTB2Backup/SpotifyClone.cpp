@@ -5,6 +5,97 @@
 
 #include "SpotifyClone.h"
 
+// Árbol Binario para canciones por ID
+struct NodoArbol {
+    int id;
+    Cancion cancion;
+    NodoArbol* izquierda;
+    NodoArbol* derecha;
+    NodoArbol(int id, const Cancion& c) : id(id), cancion(c), izquierda(nullptr), derecha(nullptr) {}
+};
+
+class ArbolCanciones {
+private:
+    NodoArbol* raiz;
+
+    NodoArbol* insertar(NodoArbol* nodo, int id, const Cancion& c) {
+        if (!nodo) return new NodoArbol(id, c);
+        if (id < nodo->id) nodo->izquierda = insertar(nodo->izquierda, id, c);
+        else nodo->derecha = insertar(nodo->derecha, id, c);
+        return nodo;
+    }
+
+    void inOrden(NodoArbol* nodo) {
+        if (!nodo) return;
+        inOrden(nodo->izquierda);
+        cout << "ID " << nodo->id << ": ";
+        nodo->cancion.mostrar();
+        inOrden(nodo->derecha);
+    }
+
+    Cancion* buscar(NodoArbol* nodo, int id) {
+        if (!nodo) return nullptr;
+        if (id == nodo->id) return &nodo->cancion;
+        if (id < nodo->id) return buscar(nodo->izquierda, id);
+        else return buscar(nodo->derecha, id);
+    }
+
+public:
+    ArbolCanciones() : raiz(nullptr) {}
+
+    void insertarCancion(int id, const Cancion& c) {
+        raiz = insertar(raiz, id, c);
+    }
+
+    void mostrarEnOrden() {
+        inOrden(raiz);
+    }
+
+    Cancion* buscarPorID(int id) {
+        return buscar(raiz, id);
+    }
+};
+
+// Mostrar canciones ordenadas por ID
+void SpotifyClone::ordenarPorIDConArbol() {
+    ArbolCanciones arbol;
+    for (int i = 0; i < biblioteca.size(); ++i) {
+        arbol.insertarCancion(i, biblioteca[i]);
+    }
+
+    cout << "\nCanciones ordenadas por ID (usando árbol binario):\n";
+    arbol.mostrarEnOrden();
+    pausar();
+}
+
+// Buscar canción por ID
+void SpotifyClone::buscarCancionPorID() {
+    ArbolCanciones arbol;
+    for (int i = 0; i < biblioteca.size(); ++i) {
+        arbol.insertarCancion(i, biblioteca[i]);
+    }
+
+    cout << "\nIngrese el ID de la canción a buscar (0 - " << biblioteca.size() - 1 << "): ";
+    int id;
+    cin >> id;
+
+    Cancion* encontrada = arbol.buscarPorID(id);
+    if (encontrada) {
+        cout << "\nCanción encontrada:\n";
+        encontrada->mostrar();
+    }
+    else {
+        cout << "No se encontró ninguna canción con ese ID.\n";
+    }
+
+    pausar();
+}
+
+
+
+
+
+
 SpotifyClone::SpotifyClone() :
     usuario("Usuario Demo", "demo@spotify.com", "password123"),
     suscripcion("Premium", 12) { // Suscripción premium por 12 meses
@@ -159,10 +250,10 @@ void SpotifyClone::inicializarDataset() {
 }
 
 void SpotifyClone::mostrarMenuPrincipal() {
-    cout << "\n ______________________________________________________________\n";
+    cout << "\n ____________________________________________________________\n";
 	cout << "|                                                              |\n";
     cout << "|                           SPOTIFY                            |\n";
-    cout << "|______________________________________________________________|\n";
+    cout << "|____________________________________________________________|\n";
     cout << "|  1. Mostrar perfil de usuario                                |\n";
     cout << "|  2. Explorar biblioteca musical                              |\n";
     cout << "|  3. Gestionar Liked Songs                                    |\n";
@@ -176,8 +267,9 @@ void SpotifyClone::mostrarMenuPrincipal() {
     cout << "| 11. Ver artistas                                             |\n";
     cout << "| 12. Ver albumes                                              |\n";
     cout << "| 13. Ver suscripcion                                          |\n";
+    cout << "| 14. Ordenamiento arbol binario                               |\n";
     cout << "|  0. Salir                                                    |\n";
-    cout << "|______________________________________________________________|\n";
+    cout << "|____________________________________________________________|\n";
     cout << "Seleccione una opcion: ";
 }
 //OPCION 2
@@ -927,6 +1019,8 @@ void SpotifyClone::pausar() {
     cin.get();
 }
 
+
+
 void SpotifyClone::ejecutar() {
     notificaciones.mostrarNotificaciones();
     pausar();
@@ -981,6 +1075,30 @@ void SpotifyClone::ejecutar() {
         case 13:
             verSuscripcion();
             break;
+        case 14: {
+            int subop;
+            do {
+                limpiarPantalla();
+                cout << "\nÁRBOL BINARIO - OPERACIONES POR ID\n";
+                cout << "1. Mostrar canciones ordenadas por ID\n";
+                cout << "2. Buscar canción por ID\n";
+                cout << "0. Volver\n";
+                cout << "Opción: ";
+                cin >> subop;
+
+                switch (subop) {
+                case 1:
+                    ordenarPorIDConArbol();
+                    break;
+                case 2:
+                    buscarCancionPorID();
+                    break;
+                }
+            } while (subop != 0);
+            break;
+        }
+    
+
         case 0:
             cout << "\n¡Hasta pronto!\n";
             break;
